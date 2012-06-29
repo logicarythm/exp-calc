@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript_study</title>
+</head>
+<body>
+    <h1>日数計算だよ</h1>
+    <input type="text" id="text">
+    <input type="button" value="Click!" id="button"><br>
+    <table>									
+    <tr>	<td>	有効期限:	</td>	<td>	<span id="exp">	</span></td>	</tr>
+    <tr>	<td>	20日後：	</td>	<td>	<span id="d20">	</span></td>	</tr>
+    <tr>	<td>	42日後：	</td>	<td>	<span id="d42">	</span></td>	</tr>
+    <tr>	<td>	72日後：	</td>	<td>	<span id="d72">	</span></td>	</tr>
+    <tr>	<td>	経過日数：	</td>	<td>	<span id="past">	</span>日</td>	</tr>
+    <tr>	<td>	eNom29日後：	</td>	<td>	<span id="d29">	</span></td>	</tr>
+    </table>									
+    <script>
+        var button = document.getElementById('button');
+        var exp = document.getElementById('exp');
+        var d20 = document.getElementById('d20');
+        var d42 = document.getElementById('d42');
+        var d72 = document.getElementById('d72');
+        var past = document.getElementById('past');
+        var d29 = document.getElementById('d29');
+        
+        button.onclick = function () {
+            var txt = document.getElementById('text').value;
+            var time = new Date();
+            var now = new Date();
+            time = Date.parse(txt);
+            var pastDays = Math.floor((now - time) / 86400000);
+            
+            exp.innerHTML = txt;
+            d20.innerHTML = addDays(time,20);
+            d42.innerHTML = addDays(time,42);
+            d72.innerHTML = addDays(time,72);            
+            d29.innerHTML = addDays(time,29);            
+
+            past.innerHTML = pastDays;     
+            
+            function addDays(time,add){
+                var dt = new Date();
+                var dtText = new String();
+                var addSec = add * 86400000;
+                var targetSec = time + addSec;
+                dt.setTime(targetSec);
+                dtText = dt.getFullYear() + "/" + (dt.getMonth()+1) + "/" + dt.getDate();
+                return dtText; 
+            } 
+        }
+        
+    </script>
+</body>
+</html>
